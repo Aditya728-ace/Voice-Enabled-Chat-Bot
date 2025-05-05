@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/eel.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form" onsubmit="return false;">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').onsubmit = async function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const isValid = await eel.validate_login(username, password)();
+            if (isValid) {
+                window.location.href = 'index.html'; 
+            } else {
+                document.getElementById('message').innerText = 'Invalid credentials, please try again.';
+            }
+        };
+    </script>
+</body>
+</html>
